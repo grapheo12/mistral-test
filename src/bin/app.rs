@@ -60,6 +60,7 @@ struct Config {
     pub embedding_model: String,
     pub query_model: String,
     pub data_source: DataSource,
+    pub k: usize,
 }
 
 
@@ -72,7 +73,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     info!("Initializing RAG pipeline");
 
-    let mut rag = RAG::new(config.embedding_model, config.query_model);
+    let mut rag = RAG::new(config.embedding_model, config.query_model, config.k);
     rag.init().await?;
 
     info!("Loading data");
